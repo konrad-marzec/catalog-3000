@@ -1,0 +1,27 @@
+{
+  "name": "catalog-3000",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "clean": "lerna run clean",
+    "build": "lerna run --parallel build",
+    "postclean": "npx rimraf node_modules",
+    "start:dev": "lerna run --parallel start:dev",
+    "lint": "lerna run --parallel lint -- --color"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-xo": "^0.39.0",
+    "eslint-config-xo-typescript": "^0.47.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "lerna": "^4.0.0",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.4"
+  }
+}

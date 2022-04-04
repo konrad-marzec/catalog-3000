@@ -1,0 +1,6 @@
+{
+  "delay": 10,
+  "verbose": true,
+  "ext": "ts, tsx, js, jsx",
+  "ignore": ["db"]
+}
