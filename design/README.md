@@ -269,40 +269,51 @@ Removes `opaque` token form `users.json` file on server.
 
 Request
 
-```bash
-docker run -p 8443:8443 catalog-3000:latest
+```json
+DELETE /api/v1/session HTTP/2
+Content-Type: application/json
+Authorization: "Bearer token"
 ```
 
-## Developing
+Response
 
-### Prerequisites
+```json
+HTTP/2 200 OK
+Content-Type: application/json
+```
 
-- npm - follow [instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+| status | code    | description |
+| :----: | :-----: | ----------- |
+| 401    | `4001`  | User not authorized
 
-- nvm - follow [instructions](https://github.com/nvm-sh/nvm)
+#### `GET /api/v1/users/me`
 
 Retrieves current user based on `opaque` token.
 
-### Running project in dev mode
+Request
 
-```bash
-  yarn install
-  yarn start:dev
+```json
+GET /api/v1/users/me HTTP/2
+Content-Type: application/json
+Authorization: "Bearer token"
 ```
 
-> self signed certificate is required
+Response
 
-### Scripts
+```json
+HTTP/2 200 OK
+Content-Type: application/json
 
-The following [npm scripts](https://docs.npmjs.com/misc/scripts) are made
-available to you in the project root. You can run each of them with
-`yarn run <script-name>`.
+{
+  "username": "username"
+}
+```
 
-If you want to limit the scope of a script to a particular package, add the
-`--scope` option to the command (e.g.,
-`yarn run clean -- --scope=@catalog/client`). See [run options][].
+| status | code    | description |
+| :----: | :-----: | ----------- |
+| 401    | `4001`  | User not authorized
 
-#### clean
+#### `GET /api/v1/file-browser/:path`
 
 Retrieves shared content. `:path` argument will be resolved within `$CATALOG_ROOT`. Endpoint responds with dir info and its direct children. Programmatically secured relative paths `../../../a/b.txt`. Path parts are encoded `/api/v1/file-browser/encodeURIComponent('asd+asd.md')/encodeURIComponent('asd?asd.txt')` Invalid paths will be resolved with error.
 
@@ -319,22 +330,6 @@ export function basePath(path) {
   return ROOT_PATH;
 }
 ```
-
-#### build
-
-_Supports [run options][]._
-
-Runs the `build` scripts for each package.
-
-#### start:dev
-
-_Supports [run options][]._
-
-Runs the `start:dev` scripts for each package.
-
-#### lint
-
-_Supports [run options][]._
 
 Request
 
